@@ -1,18 +1,170 @@
 ﻿@model dynamic
-
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
 
 <!DOCTYPE html>
 
-<html>
-<head>
-    <title>title</title>
-</head>
+
 <body>
 <div>
-      
+
+    <div class="mt-5">
+        <ul class="nav nav-pills mb-3 custom-pill" id="pills-tab" role="tablist">
+            <li class="nav-item" style="margin: auto;">
+                <a class="nav-link" id="pills-delivery-tab" data-toggle="pill" href="#pills-delivery" role="tab" aria-controls="pills-profile" aria-selected="active">Создать доставку</a>
+            </li>
+            <li class="nav-item" style="margin: auto;">
+                <a class="nav-link" id="pills-medicine-tab" data-toggle="pill" href="#pills-medicine" role="tab" aria-controls="pills-profile" aria-selected="false">Создать лекарство</a>
+            </li>
+            <li class="nav-item" style="margin: auto;">
+                <a class="nav-link" id="pills-pharmacy_warehouse-tab" data-toggle="pill" href="#pills-pharmacy_warehouse" role="tab" aria-controls="pills-profile" aria-selected="false">Добавить лекарство в аптеку</a>
+            </li>
+
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade" id="pills-delivery" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <form asp-controller="PharmacyWarehouse" asp-action="CreateDelivery" method="post">
+                    <table class="table custom-table">
+                        <tbody>
+                        <tr>
+                            <td>Поставщик</td>
+                            <td class="bg-light">
+                                <input type="text" name="Supplier" style="text-align: center;width: calc(100% - 16px);"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Дата поставки</td>
+                            <td class="bg-light">
+                                <input type="date" name="DateReceipt" style="text-align: center;width: calc(100% - 16px);"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Создать</td>
+                            <td>
+                                <input type="submit" value="Отправить" style="text-align: center;width: calc(100% - 16px);"/>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="pills-medicine" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <form asp-controller="PharmacyWarehouse" asp-action="CreateMedicine" method="post">
+                    <table class="table custom-table">
+                        <tbody>
+                        <tr>
+                            <td>Имя лекарства</td>
+                            <td class="bg-light">
+                                <input type="text" name="Name" style="text-align: center;width: calc(100% - 16px);"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ссылку на фотографию лекарства</td>
+                            <td class="bg-light">
+                                <input type="text" name="Image" style="text-align: center;width: calc(100% - 16px);"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Описание лекарства</td>
+                            <td class="bg-light">
+                                <input type="text" name="Description" style="text-align: center;width: calc(100% - 16px);"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Производитель</td>
+                            <td class="bg-light">
+                                <select size="1" name="IdProducer" style="text-align-last: center;width: calc(100% - 16px);">
+                                    @foreach (var producer in ViewBag.Producer)
+                                    {
+                                        <option value="@Convert.ToInt32(producer.Id)">@producer.Name</option>
+                                    }
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Единица измерения</td>
+                            <td class="bg-light">
+                                <select size="1" name="IdMeasureUnit" style="text-align-last: center;width: calc(100% - 16px);">
+                                    @foreach (var measureUnit in ViewBag.MeasureUnit)
+                                    {
+                                        <option value="@Convert.ToInt32(measureUnit.Id)">@measureUnit.Name</option>
+                                    }
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Создать</td>
+                            <td class="bg-light">
+                                <input type="submit" value="Отправить" style="text-align: center;width: calc(100% - 16px);"/>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="pills-pharmacy_warehouse" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <form asp-controller="PharmacyWarehouse" asp-action="CretePharmacyWarehouse" method="post">
+                    <table class="table custom-table">
+
+                        <tbody>
+                        <tr>
+                            <td>Лекарство</td>
+                            <td class="bg-light">
+                                <select size="1" name="IdMedicine" style="text-align-last: center;width: calc(100% - 16px);">
+                                    @foreach (var medicine in ViewBag.Medicine)
+                                    {
+                                        <option value="@Convert.ToInt32(medicine.Id)">@medicine.Name</option>
+                                    }
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Доставка</td>
+                            <td class="bg-light">
+                                <select size="1" name="IdDelivery" style="text-align-last: center;width: calc(100% - 16px);">
+                                    @foreach (var delivery in ViewBag.Delivery)
+                                    {
+                                        <option value="@Convert.ToInt32(delivery.Id)">@delivery.Supplier @delivery.DateReceipt</option>
+                                    }
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Количество лекарства в упаковке</td>
+                            <td class="bg-light">
+                                <input type="text" name="Quantity" style="text-align: center;width: calc(100% - 16px);"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Количество лекарства на складе</td>
+                            <td class="bg-light">
+                                <input type="text" name="CurrentQuantityInStock" style="text-align: center;width: calc(100% - 16px);"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Цена</td>
+                            <td class="bg-light">
+                                <input type="text" name="Price" style="text-align: center;width: calc(100% - 16px);"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Создать</td>
+                            <td class="bg-light">
+                                <input type="submit" value="Отправить" style="text-align: center;width: calc(100% - 16px);"/>
+                            </td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 </body>
-</html>
