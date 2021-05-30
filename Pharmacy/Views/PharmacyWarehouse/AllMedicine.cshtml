@@ -1,0 +1,21 @@
+﻿@model dynamic
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+<div>
+      @foreach (var medicine in ViewBag.AllMedicine)
+      {
+          <a>@medicine.Id</a>
+      }
+</div>
+</body>
+</html>
