@@ -68,5 +68,19 @@ namespace Pharmacy.Controllers
             ViewBag.Medicine = medicine;
             return View();
         }
+        [HttpGet("Delete")]
+        public IActionResult Delete()
+        {
+            var pharmacyWarehouse =
+                Factory.GetPharmacyWarehouses(DataBaseConnection.DatabaseConnection.GetPharmacyWarehouse());
+            ViewBag.PharmacyWarehouse = pharmacyWarehouse;
+            return View();
+        }
+        [HttpPost("Delete")]
+        public IActionResult Delete(int idPharmacyWarehouse)
+        {
+            DataBaseConnection.DatabaseConnection.DeletePharmacyWarehouse(idPharmacyWarehouse);
+            return Redirect("/Delete");
+        }
     }
 }

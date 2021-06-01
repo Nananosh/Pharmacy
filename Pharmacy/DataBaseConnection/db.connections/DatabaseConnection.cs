@@ -62,6 +62,15 @@ namespace Pharmacy.DataBaseConnection
             command.CommandText = $"SELECT * FROM delivery;";
             return command.ExecuteReader();
         }
+
+        public static SQLiteDataReader GetPharmacyWarehouse()
+        {
+            using var command = _connection.CreateCommand();
+            command.Connection = _connection;
+            command.CommandText = $"SELECT pharmacy_warehouse.id,name FROM pharmacy_warehouse " +
+                                  $"join medicine m on m.id = pharmacy_warehouse.id_medicine;";
+            return command.ExecuteReader();
+        }
         public static void InsertMedicine(Medicine medicine)
         {
             using var command = _connection.CreateCommand();
@@ -100,6 +109,14 @@ namespace Pharmacy.DataBaseConnection
                 $"(:date_receipt, :supplier);";
             command.Parameters.AddWithValue("date_receipt", delivery.DateReceipt);
             command.Parameters.AddWithValue("supplier", delivery.Supplier);
+            command.ExecuteNonQuery();
+        }
+
+        public static void DeletePharmacyWarehouse(int idPharmacyWarehouse)
+        {
+            using var command = _connection.CreateCommand();
+            command.Connection = _connection;
+            command.CommandText = $"DELETE FROM pharmacy_warehouse where id={idPharmacyWarehouse};";
             command.ExecuteNonQuery();
         }
     }
