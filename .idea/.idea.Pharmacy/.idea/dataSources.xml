@@ -22,5 +22,12 @@
       <jdbc-url>jdbc:sqlite:$USER_HOME$/Downloads/Telegram Desktop/library.sqlite</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="energyshop.sqlite" uuid="c00df750-084a-45b1-9bc6-f4f274432b28">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\nanan\RiderProjects\Pharmacy\energyshop.sqlite</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
