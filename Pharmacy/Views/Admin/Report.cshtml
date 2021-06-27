@@ -1,0 +1,61 @@
+﻿@model dynamic
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+
+
+<body>
+<div>
+
+    <div class="mt-5">
+        <ul class="nav nav-pills mb-3 custom-pill" id="pills-tab" role="tablist">
+            <li class="nav-item" style="margin: auto;">
+                <a class="nav-link" id="pills-delivery-tab" data-toggle="pill" href="#pills-delivery" role="tab" aria-controls="pills-profile" aria-selected="active">Отчёт</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade" id="pills-delivery" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <table class="table custom-table">
+                    <tbody>
+                    <tr>
+                        <td>Поставщик</td>
+                        <td>
+                            Лекарство
+                        </td>
+                        <td>Производитель</td>
+                        <td>
+                            Дата поставки
+                        </td>
+                        <td>Количество</td>
+                        <td>Цена</td>
+
+                    </tr>
+
+                    @foreach (var item in ViewBag.Report)
+                    {
+                        <tr>
+                            <td>@item.Supplier</td>
+                            <td>
+                                @item.MedicineName
+                            </td>
+                            <td>@item.ProducerName</td>
+                            <td>
+                                @item.DateReceipt
+                            </td>
+                            <td>@item.Quantity</td>
+                            <td>@item.Price</td>
+
+                        </tr>
+                    }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>

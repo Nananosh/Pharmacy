@@ -30,6 +30,10 @@
             MeasureUnitName = measureUnitName;
             ProducerName = producerName;
         }
+
+        public MedicineInPharmacyWarehouse()
+        {
+        }
     }
     
 }

@@ -12,5 +12,9 @@ namespace Pharmacy.Models
             Id = id;
             Name = name;
         }
+
+        public MeasureUnit()
+        {
+        }
     }
 }

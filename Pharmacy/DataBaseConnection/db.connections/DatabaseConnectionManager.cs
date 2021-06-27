@@ -1,4 +1,6 @@
 ﻿using System.Data.SQLite;
+using System.IO;
+
 namespace Pharmacy.DataBaseConnection
 {
     public class DatabaseConnectionManager
@@ -10,7 +12,7 @@ namespace Pharmacy.DataBaseConnection
         private static string GetConnectionString()
         {
             return
-                @"Data Source=C:\Users\nanan\RiderProjects\Pharmacy\Pharmacy\DataBaseConnection\pharmacy.sqlite";
+                $@"Data Source={Path.GetFullPath("DataBaseConnection/pharmacy.sqlite")}";
         }
 
         public static SQLiteConnection GetSqlConnection()

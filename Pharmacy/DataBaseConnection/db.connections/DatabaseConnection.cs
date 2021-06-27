@@ -9,7 +9,17 @@ namespace Pharmacy.DataBaseConnection
     {
         private readonly static SQLiteConnection _connection =
             DatabaseConnectionManager.GetSqlConnection().OpenAndReturn();
-
+        
+        
+        public static SQLiteDataReader GetMedicineIdInPharmacyWarehouse(string medicineName)
+        {
+            using var command = _connection.CreateCommand();
+            command.Connection = _connection;
+            command.CommandText =
+                $"SELECT pharmacy_warehouse.id FROM pharmacy_warehouse join medicine m on m.id = pharmacy_warehouse.id_medicine where name='{medicineName}'";
+            return command.ExecuteReader();
+        }
+        
         public static SQLiteDataReader GetMedicineInPharmacyWarehouse()
         {
             using var command = _connection.CreateCommand();

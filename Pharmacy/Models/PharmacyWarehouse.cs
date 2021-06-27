@@ -20,5 +20,9 @@
             Availability = availability;
             Price = price;
         }
+
+        public PharmacyWarehouse()
+        {
+        }
     }
 }

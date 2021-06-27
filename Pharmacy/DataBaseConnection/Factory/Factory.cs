@@ -6,6 +6,17 @@ namespace Pharmacy.DataBaseConnection.Factory
 {
     public static class Factory
     {
+        
+        public static int GetMedicineIdInPharmacyWarehouse(SQLiteDataReader dataReader)
+        {
+            int medicineId = 0;
+            while (dataReader.Read())
+            {
+                medicineId = dataReader.GetInt32(0);
+            }
+
+            return medicineId;
+        }
         public static List<(int,string)> GetPharmacyWarehouses(SQLiteDataReader dataReader)
         {
             List<(int,string)> list = new List<(int,string)>();

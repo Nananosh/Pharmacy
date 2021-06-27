@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using Pharmacy.DataBaseConnection.Factory;
 using Pharmacy.Models;
 
@@ -6,6 +8,22 @@ namespace Pharmacy.Controllers
 {
     public class PharmacyWarehouse : Controller
     {
+        [HttpPost]
+        public IActionResult Search(string medicineName)
+        {
+            int medicineId =
+                Factory.GetMedicineIdInPharmacyWarehouse(
+                    DataBaseConnection.DatabaseConnection.GetMedicineIdInPharmacyWarehouse(medicineName));
+            if (medicineId != 0)
+            {
+                return RedirectToAction("Medicine", new {medicineId});
+            }
+            else
+            {
+                return RedirectToAction("Index","Home");
+            }
+        }
+        
         [HttpGet]
         public IActionResult AllMedicine()
         {
